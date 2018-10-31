@@ -4,7 +4,7 @@ var consign = require('consign');
 var bodyParser = require('body-parser');
 var router = express.Router();
 
-module.exports = function() {
+module.exports = () => {
     var app = express();
 
     app.set('port', 3000);
