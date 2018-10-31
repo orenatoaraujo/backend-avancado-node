@@ -26,8 +26,17 @@ module.exports = (app) => {
         let client_id = req.params.client_id;
         let id = req.params.id;
 
-        contacts.findById(id).then((response) => {
+        Client.findById(client_id).exec().then((response) => {
+            if(!response) {
+                res.status(404).json('Client not found.');
+            }
+
+            contacts.findById(id).then((response) => {
             res.status(200).json(response);
+        });
+        }, (error) => {
+            console.log(error);
+            res.status(500).json(error);
         });
     };
 
