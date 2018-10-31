@@ -1,11 +1,11 @@
-var express = require('express');
+const express = require('express');
 
-var consign = require('consign');
-var bodyParser = require('body-parser');
-var router = express.Router();
+const consign = require('consign');
+const bodyParser = require('body-parser');
+const router = express.Router();
 
 module.exports = () => {
-    var app = express();
+    const app = express();
 
     app.set('port', 3000);
     app.use(bodyParser.urlencoded({extended: true}));
@@ -14,6 +14,7 @@ module.exports = () => {
 
     consign({cwd: 'api'})
         .include('models')
+        .then('services')
         .then('controllers')
         .then('routes')
         .into(app);

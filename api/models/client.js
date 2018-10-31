@@ -1,20 +1,15 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 module.exports = () => {
-    var schema = mongoose.Schema({
+    const schema = mongoose.Schema({
         name: {
             type: String,
             required: true
         },
-        email: {
+        cpf: {
             type: String,
             required: true,
-            index: true,
             unique: true
-        },
-        phone: {
-            type: String,
-            required: false
         }
     });
 

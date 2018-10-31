@@ -1,7 +1,7 @@
 module.exports = (app) => {
-    let controller = {};
+    const controller = {};
 
-    let Client = app.models.client;
+    const Client = app.models.client;
 
     controller.create = (req, res) => {
         let client = req.body;

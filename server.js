@@ -1,6 +1,6 @@
 const http = require('http')
 const app = require('./config/express')();
-const database = require('./config/database.js');
+const database = require('./config/database');
 
 database('mongodb://localhost/bea-project');
 
