@@ -19,9 +19,45 @@ module.exports = () => {
         });
     };
 
+    service.findById = (id) => {
+        return new Promise((resolve, reject) => {
+            request.get(CLIENT_CONTACTS_HOME + '/' + id, { json: true }, (err, res, body) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(body);
+                }
+            });
+        });
+    };
+
     service.create = (contact) => {
         return new Promise((resolve, reject) => {
             request.post({url: CLIENT_CONTACTS_HOME, body: contact, json: true }, (err, res, body) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(body);
+                }
+            });
+        });
+    };
+
+    service.delete = (id) => {
+        return new Promise((resolve, reject) => {
+            request.delete({url: CLIENT_CONTACTS_HOME + '/' + id, json: true }, (err, res, body) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(body);
+                }
+            });
+        });
+    };
+
+    service.update = (id, contact) => {
+        return new Promise((resolve, reject) => {
+            request.put({url: CLIENT_CONTACTS_HOME + '/' + id, body: contact, json: true }, (err, res, body) => {
                 if (err) {
                     reject(err);
                 } else {
