@@ -21,7 +21,7 @@ module.exports = () => {
 
     service.findById = (id) => {
         return new Promise((resolve, reject) => {
-            request.get(CLIENT_CONTACTS_HOME + '/' + id, { json: true }, (err, res, body) => {
+            request.get(CLIENT_CONTACTS_HOME + '/search/findByCpf?cpf=' + id, { json: true }, (err, res, body) => {
                 if (err) {
                     reject(err);
                 } else {
