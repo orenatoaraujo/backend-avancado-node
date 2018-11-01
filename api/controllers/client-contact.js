@@ -11,6 +11,7 @@ module.exports = (app) => {
         Client.findById(client_id).exec().then((response) => {
             if(!response) {
                 res.status(404).json('Client not found.');
+                return ;
             }
 
             contacts.findByCpf(response.cpf).then((response) => {
@@ -32,8 +33,13 @@ module.exports = (app) => {
             }
 
             contacts.findById(id).then((response) => {
-            res.status(200).json(response);
-        });
+                if(!response) {
+                    res.status(404).json('Contact not found');
+                    return ;
+                }
+
+                res.status(200).json(response);
+            });
         }, (error) => {
             console.log(error);
             res.status(500).json(error);
@@ -47,6 +53,7 @@ module.exports = (app) => {
         Client.findById(client_id).exec().then((response) => {
             if(!response) {
                 res.status(404).json('Client not found.');
+                return ;
             }
 
             contact.cpf = response.cpf;
@@ -64,8 +71,15 @@ module.exports = (app) => {
         let client_id = req.params.client_id;
         let id = req.params.id;
 
-        contacts.delete(id).then((response) => {
-            res.status(200).json(response);
+        contacts.findById(id).then((response) => {
+            if(!response) {
+                res.status(404).json('Contact not found.');
+                return ;
+            }
+
+            contacts.delete(id).then((response) => {
+                res.status(200).json(response);
+            });
         });
     };
 
@@ -77,12 +91,20 @@ module.exports = (app) => {
         Client.findById(client_id).exec().then((response) => {
             if(!response) {
                 res.status(404).json('Client not found.');
+                return ;
             }
 
             contact.cpf = response.cpf;
 
-            contacts.update(id, contact).then((response) => {
-                res.status(200).json(response);
+            contacts.findById(id).then((response) => {
+                if(!response) {
+                    res.status(404).json('Contact not found.');
+                    return ;
+                }
+
+                contacts.update(id, contact).then((response) => {
+                    res.status(200).json(response);
+                });
             });
         }, (error) => {
             console.log(error);
