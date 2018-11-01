@@ -2,12 +2,12 @@ const express = require('express');
 
 const consign = require('consign');
 const bodyParser = require('body-parser');
-const router = express.Router();
+const APP_PORT = process.env.APP_PORT || 3000;
 
 module.exports = () => {
     const app = express();
 
-    app.set('port', 3000);
+    app.set('port', APP_PORT);
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
     app.use(require('method-override')());
