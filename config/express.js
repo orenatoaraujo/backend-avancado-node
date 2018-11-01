@@ -2,7 +2,7 @@ const express = require('express');
 
 const consign = require('consign');
 const bodyParser = require('body-parser');
-const APP_PORT = parseInt(process.env.APP_PORT || 3000);
+const APP_PORT = parseInt(process.env.PORT || 3000);
 
 module.exports = () => {
     const app = express();
